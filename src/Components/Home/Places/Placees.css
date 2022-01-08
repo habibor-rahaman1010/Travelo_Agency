@@ -1,0 +1,29 @@
+.place{
+    margin-top: 70px;
+    margin-bottom: 100px;
+}
+.PupolerPlace{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 30rem;
+    max-width: 1000px;
+    margin: auto;
+    padding: 10px;
+    grid-row-gap: 25px;
+}
+.details{
+    position: relative;
+    top: 150px;
+    margin-left: 35px;
+}
+.pupoler{
+    width: 100%;
+    margin: 10px;
+    color: rgb(219, 219, 219);
+}
+.place h2{
+    font-weight: 400;
+    color: rgb(59, 59, 59);
+    margin-bottom: 20px;
+}
+

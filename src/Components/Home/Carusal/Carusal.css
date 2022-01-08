@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&family=The+Nautigal:wght@400;700&display=swap');
+/* font-family: 'Handlee', cursive; */
+
+
+
+.img{
+   height: 92.3vh;
+}
+.title{
+    position: relative;
+    top: 0;
+    margin-top: 5%;
+}
+.title h3{
+    color: rgb(77, 180, 180);
+    font-size: 120px;
+   font-family: 'Handlee', cursive;
+}
+.title Button{
+    width: 170px;
+    height: 50px;
+}
+.carousel-indicators {
+    display: none;
+}
+.title1 h3{
+    color: rgb(193, 253, 255);
+}
+.title2 h3{
+    color: rgb(193, 253, 255);
+}
+.title4 h3{
+    color: rgb(193, 253, 255);
+}
+
+.title6 h3{
+    color: rgb(225, 244, 245);
+}
+.title p{
+    font-size: 30px;
+    width: 80%;
+    margin: auto;
+    margin-bottom: 30px;
+}
+.title2 p{
+    color: whitesmoke;
+}
+.title3 p{
+    color: rgb(91, 176, 209);
+}

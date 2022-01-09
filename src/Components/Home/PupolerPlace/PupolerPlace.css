@@ -1,0 +1,63 @@
+.cards{
+    box-shadow: rgba(122, 122, 122, 0.24) 0px 3px 8px;
+    color: rgb(82, 82, 82);
+}
+.cards{
+    transition: 0.6s;
+}
+
+.cards:hover{
+    -moz-transform: translate(0px, -15px);
+    -webkit-transform: translate(0px, -15px);
+    -o-transform: translate(0px, -15px);
+    -ms-transform: translate(0px, -15px);
+    transform: translate(0px, -15px);
+    overflow: hidden;
+    width: 100%;
+    opacity: 0.8;
+}
+.pupoler-place  h1{
+    color: rgb(75, 75, 75);
+}
+.pupoler-place p{
+    color: rgb(94, 94, 94);
+    padding-bottom: 60px;
+    max-width: 60%;
+    text-align: center;
+    margin: auto;
+}
+.icon-color{
+    color: #fdae5c;
+    font-size: 12px;
+}
+.review{
+    font-size: 14px;
+    color: rgb(100, 100, 100);
+}
+.populer-section{
+    padding-bottom: 100px;
+}
+.more{
+    width: 150px;
+    height: 45px;
+    line-height: 45px;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    right: 50%;
+    padding-bottom: 100px;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 60px;
+}
+.duration{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.duration p {
+    font-size: 13.5px;
+    color: rgb(107, 107, 107);
+}

@@ -21,7 +21,7 @@ const Places = () => {
         <div className='place'>
             <div className='text-center'>
                 <h2>Popular Destination</h2>
-                <p></p>
+                <p className='w-50 m-auto px-5 pt3 pb-5 '>Lost With Purpose is another great travel blog that focuses on providing detailed information about unusual travel destinations like Saudi Arabia and Afghanistan that you can follow.</p>
             </div>
             <div className='PupolerPlace'>
                 {

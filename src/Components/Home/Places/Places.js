@@ -39,6 +39,7 @@ const Place = ({ x }) => {
             backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6)), url(${imgage})`,
             height: '100%',
             width: '100%',
+            backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
             backgroundSize: '300px',
         }}>

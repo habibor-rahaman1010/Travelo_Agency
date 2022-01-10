@@ -12,6 +12,7 @@ import "./Review.css";
 import SwiperCore, { Pagination, Navigation } from "swiper";
 import Rating from 'react-rating';
 
+
 // install Swiper modules
 SwiperCore.use([Pagination, Navigation]);
 
@@ -75,13 +76,14 @@ const reviews = [
 
 
 const Review = () => {
+
     return (
         <div className='pb-5'>
             <h2 className='text-center'>Tourism review</h2>
             <>
 
                 <Swiper
-
+                    mySwiper
                     slidesPerView={3.5}
                     spaceBetween={30}
                     slidesPerGroup={3}

@@ -7,3 +7,21 @@
     font-size: 30px;
     color: whitesmoke;
 }
+.myBtn{
+    background-color: rgb(39, 42, 43);
+    border: none;
+    cursor: pointer;
+}
+.profile img{
+    width: 50px;
+    border-radius: 50px;
+}
+.myModal .modal-content {
+    position: absolute;
+    left: 274px;
+    top: 40px;
+}
+.profileImg{
+    height: 100px;
+    width: 100px;
+}

@@ -1,0 +1,11 @@
+.registration{
+    background-color: rgb(255, 255, 255);
+    padding: 30px;
+    box-shadow: rgba(109, 114, 117, 0.3) 0px 1px 2px 0px, rgba(80, 84, 87, 0.15) 0px 2px 6px 2px;
+    border-radius: 6px;
+    border: 0.5px solid rgb(255, 255, 255);
+}
+.registrationText{
+    color: rgb(99, 99, 99);
+    font-size: 22px;
+}

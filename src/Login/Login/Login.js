@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import './Login.css'
 import UseAuthContextAPI from '../../Hooks/UseAuthContextAPI';
+import { Link, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Login = () => {
     //modal state here
@@ -15,63 +17,71 @@ const Login = () => {
     const [notification, setNotification] = useState('')
 
     const { firebaseContext } = UseAuthContextAPI();
-    const { setUser, error, setError, googleSignIn, githubSignIn, coustomUserLogin, userPasswordReset } = firebaseContext;
+    const { error, setError, googleSignIn, githubSignIn, coustomUserLogin, userPasswordReset, setIsLoading } = firebaseContext;
+
+    const location = useLocation();
+    const history = useHistory();
+    const redirect_URI = location?.state?.from || '/home'
 
 
     const loginClickHandler = (e) => {
         e.preventDefault();
-        handleUserLogin(email, password)
-    }
+        handleUserLogin(email, password);
+    };
 
     // google sign in functionality herre...
     const googleClickHandeler = () => {
         googleSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_URI);
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
+            }).finally(() => {
+                setIsLoading(false);
             });
-    }
+    };
 
 
     // github sign in functionality herre...
     const githubClickHandeler = () => {
         githubSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_URI)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
+            }).finally(() => {
+                setIsLoading(false)
             });
-    }
+    };
 
     //get email in email input field..
     const handleGetEmail = (e) => {
         const email = e.target.value;
         setEmail(email);
-    }
+    };
 
     //get password in password input field...
     const handleGetPassword = (e) => {
         const password = e.target.value;
         setPassword(password);
-    }
+    };
 
     //couston user login functionality here....
     const handleUserLogin = (email, password) => {
         coustomUserLogin(email, password)
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+        setIsLoading(true)
+            .then(() => {
+                history.push(redirect_URI);
                 setNotification('User Logged In Successfully!')
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
-            })
-    }
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    };
 
     //user Password Reset functionality here
     const handleUserPasswordReset = (email) => {
@@ -81,8 +91,8 @@ const Login = () => {
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
-            })
-    }
+            });
+    };
 
 
     return (
@@ -91,7 +101,7 @@ const Login = () => {
             <Form onSubmit={loginClickHandler} className='w-50 m-auto px-5 login'>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control onBlur={handleGetEmail} type="email" placeholder="Enter email" />
+                    <Form.Control onBlur={handleGetEmail} type="email" placeholder="Enter email" required />
 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -100,7 +110,7 @@ const Login = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onBlur={handleGetPassword} type="password" placeholder="Password" />
+                    <Form.Control onBlur={handleGetPassword} type="password" placeholder="Password" required />
 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -118,6 +128,10 @@ const Login = () => {
                     <Button onClick={() => { handleUserPasswordReset(email) }}>Reset Password</Button>
                 </div>
             </Form>
+
+            <div className='w-50 m-auto mt-4'>
+                <p>Are You New User? <Link to={'/registration'}>Pleace Registration Now!</Link> </p>
+            </div>
 
             <div className='w-50 m-auto mt-4'>
                 <Button onClick={googleClickHandeler} variant="success" type="submit">

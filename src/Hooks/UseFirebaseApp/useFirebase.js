@@ -6,9 +6,11 @@ const useFirebase = () => {
     initializeAuthentication()
     const [user, setUser] = useState({});
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
 
     //Google sign in functionality here...
     const googleSignIn = () => {
+        setIsLoading(true)
         const googleProvider = new GoogleAuthProvider();
         const auth = getAuth();
         return signInWithPopup(auth, googleProvider);
@@ -16,6 +18,7 @@ const useFirebase = () => {
 
     //Github sign in functionality here....
     const githubSignIn = () => {
+        setIsLoading(true)
         const githubProvider = new GithubAuthProvider();
         const auth = getAuth();
         return signInWithPopup(auth, githubProvider);
@@ -29,6 +32,7 @@ const useFirebase = () => {
 
     //email password user login funtionality here
     const coustomUserLogin = (email, password) => {
+        setIsLoading(true)
         const auth = getAuth();
         return signInWithEmailAndPassword(auth, email, password)
     }
@@ -52,21 +56,41 @@ const useFirebase = () => {
     }
 
 
-    // user persistance, if you use depandenchi in useEfect mustbe use callback function use in else statment otherwise looping infinity.
+    // user persistance, its the best way to persistance login user... dont issu crreate when you solve isloading problem...
     useEffect(() => {
+        setIsLoading(true)
         const auth = getAuth();
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user);
             }
             else {
-                return () => {
-                    setUser({})
-                };
+                setUser({})
             }
+            setIsLoading(false)
         })
         return () => unsubscribe();
-    }, [user])
+    }, []);
+
+
+    // // user persistance, if you use depandenchi in useEfect mustbe use callback function use in else statment otherwise looping infinity. it's methos use to still work but some poblem create when you solve reload problem, [isLoding, setIsLoading] = useState(true); recomende don't use dependenchi in your useEffect state...
+
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     const auth = getAuth();
+    //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             setUser(user);
+    //         }
+    //         else {
+    //             return () => {
+    //                 setUser({})
+    //             };
+    //         }
+    //         setIsLoading(false)
+    //     })
+    //     return () => unsubscribe();
+    // }, [user])
 
 
     // // user persistance, if you use depandenchi in useEfect mustbe use callback function use in else statment otherwise looping infinity.
@@ -100,12 +124,15 @@ const useFirebase = () => {
 
     // logout user
     const logOutUser = () => {
+        setIsLoading(true)
         const auth = getAuth();
         signOut(auth)
             .then(() => {
                 setUser({})
             }).catch(() => {
 
+            }).finally(() => {
+                setIsLoading(false)
             })
     }
 
@@ -121,7 +148,9 @@ const useFirebase = () => {
         coustomUserLogin,
         coustomUpdateProfile,
         emailVerify,
-        userPasswordReset
+        userPasswordReset,
+        setIsLoading,
+        isLoading,
     }
 };
 

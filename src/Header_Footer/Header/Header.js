@@ -26,11 +26,11 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto navbar">
-                            <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
-                            <Nav.Link as={NavLink} to="/destinations">Destination</Nav.Link>
-                            <Nav.Link as={NavLink} to="/blogs">Blogs</Nav.Link>
-                            <Nav.Link as={NavLink} to="/popular_places">Popular Places</Nav.Link>
-                            <Nav.Link as={NavLink} to="/about">About</Nav.Link>
+                            <Nav.Link as={NavLink} to={"/home"}>Home</Nav.Link>
+                            <Nav.Link as={NavLink} to={"/destinations"}>Destination</Nav.Link>
+                            <Nav.Link as={NavLink} to={"/blogs"}>Blogs</Nav.Link>
+                            <Nav.Link as={NavLink} to={"/popular_places"}>Popular Places</Nav.Link>
+                            <Nav.Link as={NavLink} to={"/about"}>About</Nav.Link>
 
 
                         </Nav>
@@ -39,8 +39,8 @@ const Header = () => {
                                 user.photoURL || user.email ? <div className='profile'><span> <button className="myBtn" onClick={handleShow}><img src={user.photoURL ? user.photoURL : avatar} alt="Avater" /></button> </span> &nbsp; &nbsp;
                                     <Button onClick={logOutUser} variant='danger'>Logout</Button> </div> :
                                     [
-                                        <Nav.Link as={NavLink} to="/login">Login</Nav.Link>,
-                                        <Nav.Link as={NavLink} to="/registration">Sign up</Nav.Link>
+                                        <Nav.Link as={NavLink} to={"/login"}>Login</Nav.Link>,
+                                        <Nav.Link as={NavLink} to={"/registration"}>Sign up</Nav.Link>
                                     ]
                             }
 

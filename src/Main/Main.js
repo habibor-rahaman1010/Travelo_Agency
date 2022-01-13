@@ -6,6 +6,7 @@ import Blogs from '../Components/Blogs/Blogs/Blogs';
 import Destinations from '../Components/Destination/Destinations/Destinations';
 import Home from '../Components/Home/Home';
 import NotFound from '../Components/NotFound/NotFound';
+import PrivateRoute from '../Components/PrivateRoute/PrivateRoute';
 import MyAuthProvider from '../ContextAPI/MyAuthProvider';
 import Footer from '../Header_Footer/Footer/Footer';
 import Header from '../Header_Footer/Header/Header';
@@ -37,13 +38,13 @@ const Main = () => {
                             <AllpupolerPlaces></AllpupolerPlaces>
                         </Route>
 
-                        <Route exact path={'/blogs'}>
+                        <PrivateRoute exact path={'/blogs'}>
                             <Blogs></Blogs>
-                        </Route>
+                        </PrivateRoute>
 
-                        <Route exact path={'/destinations'}>
+                        <PrivateRoute exact path={'/destinations'}>
                             <Destinations></Destinations>
-                        </Route>
+                        </PrivateRoute>
 
 
                         <Route exact path={'/login'}>

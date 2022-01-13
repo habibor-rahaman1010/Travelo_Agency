@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
+import { useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import UseAuthContextAPI from '../../Hooks/UseAuthContextAPI';
 import './Registration.css'
 
 const Registration = () => {
     const { firebaseContext } = UseAuthContextAPI();
-    const { setUser, error, setError, googleSignIn, githubSignIn, coustomUserCreate, emailVerify, coustomUpdateProfile } = firebaseContext;
+    const { error, setError, googleSignIn, githubSignIn, coustomUserCreate, emailVerify, coustomUpdateProfile } = firebaseContext;
+
+    const location = useLocation();
+    const history = useHistory();
+    const redirect_URI = location?.state?.from || '/home'
 
     //this is my modal state here
     const [show, setShow] = useState(false);
@@ -35,9 +41,8 @@ const Registration = () => {
     // google sign in functionality herre...
     const googleClickHandeler = () => {
         googleSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_URI)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
@@ -48,9 +53,8 @@ const Registration = () => {
     // github sign in functionality herre...
     const githubClickHandeler = () => {
         githubSignIn()
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_URI)
             }).catch((error) => {
                 const errorMessage = error.message;
                 setError(errorMessage);
@@ -63,7 +67,6 @@ const Registration = () => {
         setName(name);
     }
 
-    console.log(name)
     //get email in email input field..
     const handleGetEmail = (e) => {
         const email = e.target.value;
@@ -79,9 +82,8 @@ const Registration = () => {
     // coustom create a user funtionality here....
     const createUser = (email, password) => {
         coustomUserCreate(email, password)
-            .then((res) => {
-                const user = res.user;
-                setUser(user);
+            .then(() => {
+                history.push(redirect_URI)
                 setDisplayName(name);
                 Verified_Email();
             }).catch((error) => {
@@ -122,7 +124,7 @@ const Registration = () => {
             <Form onSubmit={registrationClickHandler} className='w-50 m-auto px-5 registration'>
                 <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control onBlur={handleGetName} type="text" placeholder="Enter Name" />
+                    <Form.Control onBlur={handleGetName} type="text" placeholder="Enter Name" required />
 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -131,7 +133,7 @@ const Registration = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control onBlur={handleGetEmail} type="email" placeholder="Enter email" />
+                    <Form.Control onBlur={handleGetEmail} type="email" placeholder="Enter email" required />
 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -140,7 +142,7 @@ const Registration = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onBlur={handleGetPassword} type="password" placeholder="Password" />
+                    <Form.Control onBlur={handleGetPassword} type="password" placeholder="Password" required />
 
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
@@ -157,6 +159,10 @@ const Registration = () => {
                     Registration Now
                 </Button>
             </Form>
+
+            <div className='w-50 m-auto mt-4'>
+                <p>Are You Alreay Registered? <Link to={'/login'}>Pleace Can Login Now!</Link> </p>
+            </div>
 
             <div className='w-50 m-auto mt-4'>
                 <Button onClick={googleClickHandeler} variant="success" type="submit">

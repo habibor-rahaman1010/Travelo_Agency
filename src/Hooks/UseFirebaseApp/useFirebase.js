@@ -32,7 +32,7 @@ const useFirebase = () => {
 
     //email password user login funtionality here
     const coustomUserLogin = (email, password) => {
-        setIsLoading(true)
+        setIsLoading(true);
         const auth = getAuth();
         return signInWithEmailAndPassword(auth, email, password)
     }

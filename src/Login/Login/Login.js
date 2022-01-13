@@ -71,7 +71,6 @@ const Login = () => {
     //couston user login functionality here....
     const handleUserLogin = (email, password) => {
         coustomUserLogin(email, password)
-        setIsLoading(true)
             .then(() => {
                 history.push(redirect_URI);
                 setNotification('User Logged In Successfully!')
